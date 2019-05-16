@@ -69,7 +69,10 @@
       ];
 
       // Filtra todos os objetos que batem na regra
-      const mainCharacter = characters.filter(char => char.id === 1);
+      console.log("Filtro de Array:");
+      const mainCharacter = characters.filter(
+        char => char.id === 1 || char.id === 2
+      );
       console.log(mainCharacter);
 
       // SPREAD
@@ -77,7 +80,7 @@
       // No novo array é adicionado o último mais o que colocar na frente
 
       const arr = [1, 2, 3];
-      const arr2 = [...arr.filter(num => num === 2), 4];
+      const arr2 = [9, ...arr.filter(num => num === 2 || num === 1), 4];
       console.log(arr2);
 
       const person2 = {
@@ -153,14 +156,14 @@
 
       // File 1 (file1.js)
 
-      export const name1 = "Jeff";
-      export const age1 = 37;
+      //export const name1 = "Jeff";
+      //export const age1 = 37;
 
-      export default Person;
+      //export default Person;
 
       // File 2 (file2.js)
-      import { name1, age1 } from ".file1";
-      import Person from ".file1";
+      //import { name1, age1 } from ".file1";
+      //import Person from ".file1";
     </script>
   </body>
 </html>
