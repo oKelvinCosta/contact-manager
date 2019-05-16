@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+
+    <title>React App ES6</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <script>
+      // LET
+      let name = "Kelvin";
+      name = "Kelvin Mudou";
+
+      // CONST
+      // Não pode pode mudar o valor da constante, só de seu objeto
+      const password = 123;
+      const pessoa = [{ id: 1, age: 20 }];
+
+      // Funciona
+      pessoa.age = 30;
+
+      // Funciona
+      const nums = [1, 2, 3, 4];
+      nums.push(5);
+
+      // ARROW FUNCTIONS
+
+      const sayYes = () => console.log("yes");
+      sayYes();
+
+      const sayHello = name => {
+        let gg = 1 + 1;
+        console.log("hello" + gg);
+      };
+      sayHello();
+
+      // Função normal
+      function valor(value) {
+        console.log("hello");
+      }
+
+      // FOREACH
+
+      const fruits = ["Apples", "Oranges", "Grapes"];
+
+      fruits.forEach((fruit, index) => console.log(`${index + 1} - ${fruit}`));
+
+      // MAP
+
+      // Para aplicar uma ação em todos os elementos de um aray
+      // Não funciona arrow function com chave
+      const singleFruit = fruits.map(fruitsArray =>
+        fruitsArray.slice(0, -1).toUpperCase()
+      );
+
+      console.log(singleFruit);
+
+      // FILTER
+
+      const characters = [
+        { id: 1, name: "Sheld" },
+        { id: 2, name: "Gioga" },
+        { id: 3, name: "Verm" }
+      ];
+
+      // Filtra todos os objetos que batem na regra
+      const mainCharacter = characters.filter(char => char.id === 1);
+      console.log(mainCharacter);
+
+      // SPREAD
+
+      // No novo array é adicionado o último mais o que colocar na frente
+
+      const arr = [1, 2, 3];
+      const arr2 = [...arr.filter(num => num === 2), 4];
+      console.log(arr2);
+
+      const person2 = {
+        name: "Brand",
+        age: 33
+      };
+
+      const newPerson = {
+        ...person2,
+        email: "okelvin"
+      };
+
+      console.log(newPerson);
+
+      // DESTRUCTURING
+
+      // Puxa certos atributos de um objeto
+
+      const profile = {
+        nick: "Kelvin",
+        age: 19,
+        adress: {
+          street: "40 Main st",
+          city: "Boston"
+        },
+        hobbies: ["movies", "games"]
+      };
+
+      const { nick, adress, hobbies } = profile;
+      const { street } = profile.adress;
+      console.log(nick, adress, hobbies[1]);
+
+      // CLASSES
+
+      class Person {
+        constructor(name, age) {
+          // Atributos acessados por qualquer metodo
+          this.name = name;
+          this.age = age;
+          console.log("ran");
+        }
+
+        // Método
+        greet() {
+          return `Meu nome é <b>${this.name}</b> e tenho <b>${
+            this.age
+          }</b> anos`;
+        }
+      }
+
+      const person4 = new Person("Keke", 19);
+      console.log(person4.name);
+      console.log(person4.greet());
+
+      // SUBCLASSES
+
+      class Customer extends Person {
+        constructor(name, balance) {
+          // Referencia atributo da classe pai
+          super(name);
+          this.balance = balance;
+        }
+
+        info() {
+          return `${this.name} ganhou: $${this.balance}.00`;
+        }
+      }
+
+      const customer1 = new Customer("Lightzen", 888);
+      console.log(customer1.info());
+
+      // MODULES
+
+      // File 1 (file1.js)
+
+      export const name1 = "Jeff";
+      export const age1 = 37;
+
+      export default Person;
+
+      // File 2 (file2.js)
+      import { name1, age1 } from ".file1";
+      import Person from ".file1";
+    </script>
+  </body>
+</html>
