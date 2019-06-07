@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Consumer } from "../../context";
 import Axios from "axios";
 import Colors from "../Colors";
+import { Link } from "react-router-dom";
 
 // RCC cria um component
 
@@ -54,6 +55,15 @@ export default class Contact extends Component {
                 </div>
 
                 <div>
+                  <Link to={`contact/edit/${id}`}>
+                    <i
+                      className="fas fa-pencil-alt"
+                      style={{
+                        cursos: "pointer",
+                        marginRight: "20px"
+                      }}
+                    />
+                  </Link>
                   <i
                     onClick={this.onDeleteClick.bind(this, id, dispatch)}
                     className="fas fa-times"

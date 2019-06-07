@@ -12,9 +12,9 @@ const Header = props => {
       className="navbar navbar-expand-sm navbar-dark mb-3 py-0"
     >
       <div className="container">
-        <a href="/" className="navbar-brand">
+        <Link to="/" className="navbar-brand">
           {branding}
-        </a>
+        </Link>
 
         <div>
           <ul className="navbar-nav mr-auto">
@@ -25,7 +25,7 @@ const Header = props => {
               </Link>
             </li>
             <li>
-              <Link to="/add" className="nav-link">
+              <Link to="/contact/add" className="nav-link">
                 <i className="fas fa-plus" />
                 Add
               </Link>
@@ -35,6 +35,12 @@ const Header = props => {
               <Link to="/about" className="nav-link">
                 <i className="fas fa-question" />
                 About
+              </Link>
+            </li>
+            <li>
+              <Link to="/test" className="nav-link">
+                <i className="fas fa-life-ring" />
+                LifeCycle
               </Link>
             </li>
           </ul>
