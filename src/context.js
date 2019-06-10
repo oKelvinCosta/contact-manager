@@ -1,26 +1,33 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Storage from "./Storage";
 
 const Context = React.createContext();
-
 const reducer = (state, action) => {
   switch (action.type) {
     case "DELETE_CONTACT":
-      return {
+      const del = {
         ...state,
         contacts: state.contacts.filter(
           contact => contact.id !== action.payload
         )
       };
 
+      Storage.setStorage("contacts", JSON.stringify(del));
+      return del;
+
     case "ADD_CONTACT":
-      return {
+      const add = {
         ...state,
         contacts: [action.payload, ...state.contacts]
       };
 
+      Storage.setStorage("contacts", JSON.stringify(add));
+
+      return add;
+
     case "UPDATE_CONTACT":
-      return {
+      const update = {
         ...state,
         contacts: state.contacts.map(contact =>
           contact.id === action.payload.id
@@ -28,6 +35,8 @@ const reducer = (state, action) => {
             : contact
         )
       };
+      Storage.setStorage("contacts", JSON.stringify(update));
+      return update;
 
     default:
       return state;
@@ -35,7 +44,7 @@ const reducer = (state, action) => {
 };
 
 export class Provider extends Component {
-  // Isso é um state global
+  // Isso é um state global da classe
   state = {
     contacts: [
       {
@@ -62,9 +71,33 @@ export class Provider extends Component {
     }
   };
 
+  setLocalStorage = data => {
+    const json = JSON.stringify(data);
+    localStorage.setItem("contacts", json);
+  };
+
+  pullLocalStorage = () => {
+    const json = JSON.parse(localStorage.getItem("contacts"));
+    this.setState({ contacts: json });
+  };
+
   async componentDidMount() {
-    const res = await axios.get("https://jsonplaceholder.typicode.com/users");
-    this.setState({ contacts: res.data });
+    if (!Storage.existStorage("contacts")) {
+      // Pega do site
+      const res = await axios.get("https://jsonplaceholder.typicode.com/users");
+      // seta local
+      this.setState({ contacts: res.data });
+      // seta storage
+      const json = JSON.stringify(res.data);
+      Storage.setStorage("contacts", json);
+      // debug
+      console.log("storage NÃO existe");
+    } else {
+      const contacts = Storage.getStorage("contacts").contacts;
+
+      this.setState({ contacts: contacts });
+      console.log("storage Existe");
+    }
 
     console.log(this.state);
   }
