@@ -13,6 +13,8 @@ class Contacts extends Component {
           //console.log("---------------------");
 
           const { contacts } = value;
+          // console.log("contacts");
+          // console.log(contacts);
 
           return (
             <React.Fragment>

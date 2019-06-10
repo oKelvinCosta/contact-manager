@@ -13,7 +13,7 @@ const reducer = (state, action) => {
         )
       };
 
-      Storage.setStorage("contacts", JSON.stringify(del));
+      Storage.setStorage("contacts", JSON.stringify(del.contacts));
       return del;
 
     case "ADD_CONTACT":
@@ -22,7 +22,7 @@ const reducer = (state, action) => {
         contacts: [action.payload, ...state.contacts]
       };
 
-      Storage.setStorage("contacts", JSON.stringify(add));
+      Storage.setStorage("contacts", JSON.stringify(add.contacts));
 
       return add;
 
@@ -35,7 +35,7 @@ const reducer = (state, action) => {
             : contact
         )
       };
-      Storage.setStorage("contacts", JSON.stringify(update));
+      Storage.setStorage("contacts", JSON.stringify(update.contacts));
       return update;
 
     default:
@@ -71,16 +71,6 @@ export class Provider extends Component {
     }
   };
 
-  setLocalStorage = data => {
-    const json = JSON.stringify(data);
-    localStorage.setItem("contacts", json);
-  };
-
-  pullLocalStorage = () => {
-    const json = JSON.parse(localStorage.getItem("contacts"));
-    this.setState({ contacts: json });
-  };
-
   async componentDidMount() {
     if (!Storage.existStorage("contacts")) {
       // Pega do site
@@ -91,15 +81,16 @@ export class Provider extends Component {
       const json = JSON.stringify(res.data);
       Storage.setStorage("contacts", json);
       // debug
-      console.log("storage NÃO existe");
+      // console.log("storage NÃO existe");
     } else {
-      const contacts = Storage.getStorage("contacts").contacts;
+      const contactsStorage = Storage.getStorage("contacts");
 
-      this.setState({ contacts: contacts });
-      console.log("storage Existe");
+      this.setState({ contacts: contactsStorage });
+      // console.log(contactsStorage);
+      // console.log("storage Existe");
     }
 
-    console.log(this.state);
+    // console.log("componentDidMount");
   }
 
   render() {
