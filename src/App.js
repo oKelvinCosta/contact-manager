@@ -1,7 +1,8 @@
 import React from "react";
 import { Provider } from "./context";
-
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// Para exportar PROD
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/layout/Header";
 
 import "./App.css";
@@ -24,7 +25,7 @@ function App() {
 
   return (
     <Provider>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <div className="App">
           <Header branding="Contact Manager" />
           <div className="container">
